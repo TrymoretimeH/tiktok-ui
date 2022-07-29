@@ -9,7 +9,6 @@ import {
     faEarthAsia,
     faQuestion,
     faKeyboard,
-    faCloudUpload,
     faUser,
     faCoins,
     faGear,
@@ -25,6 +24,8 @@ import styles from './Header.module.scss';
 import images from '~/assets/images';
 import AccountItem from '~/components/AccountItem';
 import Menu from '~/components/Popper/Menu';
+import { InboxIcon, MessagesIcon, SearchIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -141,24 +142,34 @@ function Header() {
                         />
 
                         <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon />
                         </button>
                     </div>
                 </HeadlessTippy>
 
                 <div className={cx('actions')}>
                     {currentUser ? (
-                        <Fragment>
+                        <div className={cx('user-actions')}>
+                            <Button text>Upload</Button>
                             <Tippy
                                 delay={[0, 200]}
-                                content="Upload video"
+                                content="Messages"
                                 placement="bottom"
                             >
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                    <MessagesIcon />
                                 </button>
                             </Tippy>
-                        </Fragment>
+                            <Tippy
+                                delay={[0, 200]}
+                                content="Inbox"
+                                placement="bottom"
+                            >
+                                <button className={cx('action-btn')}>
+                                    <InboxIcon />
+                                </button>
+                            </Tippy>
+                        </div>
                     ) : (
                         <Fragment>
                             <Button text>Upload</Button>
@@ -170,7 +181,7 @@ function Header() {
                         onChange={handleMenuChange}
                     >
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
                                 src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/6e5a87dd45745546ec30b3abf300ec75~c5_300x300.webp?x-expires=1659110400&x-signature=2COkODQJ5Mq1zzvWouOSjGdyQPo%3D"
                                 alt="Hoaa"
